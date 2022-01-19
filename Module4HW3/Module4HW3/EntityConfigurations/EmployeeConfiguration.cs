@@ -14,5 +14,11 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
         builder.Property(e => e.LastName).IsRequired().HasColumnName("LastName").HasMaxLength(50);
         builder.Property(e => e.HiredDate).IsRequired().HasColumnName("HiredDate").HasMaxLength(7);
         builder.Property(e => e.DateOfBirth).HasColumnName("DateOfBirth");
+        builder.HasOne(e => e.Title)
+            .WithMany(t => t.Employees)
+            .HasForeignKey(i => i.TitleId);
+        builder.HasOne(e => e.Office)
+            .WithMany(o => o.Employees)
+            .HasForeignKey(i => i.OfficeId);
     }
 }
