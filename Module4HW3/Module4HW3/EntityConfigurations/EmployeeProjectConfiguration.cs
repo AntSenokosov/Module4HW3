@@ -8,9 +8,9 @@ public class EmployeeProjectConfiguration : IEntityTypeConfiguration<EmployeePro
 {
     public void Configure(EntityTypeBuilder<EmployeeProject> builder)
     {
-        builder.HasKey(e => e.Id);
+        builder.ToTable("EmployeeProject").HasKey(e => e.Id);
         builder.Property(e => e.Id).HasColumnName("EmployeeProjectId").ValueGeneratedOnAdd();
-        builder.Property(e => e.Rate).IsRequired().HasColumnName("Rate");
+        builder.Property(e => e.Rate).IsRequired().HasColumnName("Rate").HasColumnType("money");
         builder.Property(e => e.StartedDate).HasColumnName("StartedDate").HasMaxLength(7);
         builder.HasOne(e => e.Employee)
             .WithMany(o => o.EmployeeProjects)
